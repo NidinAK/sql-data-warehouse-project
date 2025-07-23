@@ -90,3 +90,40 @@ FROM
 	bronze.crm_prd_info
 WHERE
 	prd_end_dt < prd_start_dt;
+
+-- ============================================================
+-- Checking silver.crm_prd_info
+-- ============================================================
+
+-- Check for invalid dates
+SELECT 
+	NULLIF(sls_order_dt, 0) as sls_order_dt
+FROM 
+	silver.crm_sales_details
+WHERE 
+	sls_order_dt <= 0 OR
+	LEN(sls_order_dt) != 8 OR
+	sls_order_dt > 20500101 OR
+	sls_order_dt < 19000101;
+
+-- Checking for invalid date orders
+SELECT *
+FROM 
+	silver.crm_sales_details
+WHERE 
+	sls_order_dt > sls_due_dt OR
+	sls_order_dt > sls_ship_dt;
+
+-- Checking data consistencies: Between sales, quantity, price
+--> sales = quantity * price
+--> Values must not be null, zero or negative
+
+SELECT DISTINCT
+	sls_sales, sls_price, sls_quantity
+FROM
+	silver.crm_sales_details
+WHERE
+	sls_sales != sls_price * sls_quantity OR
+	sls_sales IS NULL OR sls_price IS NULL OR sls_quantity IS NULL OR
+	sls_sales <= 0 OR sls_price <= 0 OR sls_quantity <= 0
+ORDER BY sls_sales, sls_price, sls_quantity	;
