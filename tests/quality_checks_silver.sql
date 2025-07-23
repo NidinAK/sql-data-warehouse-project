@@ -47,10 +47,18 @@ FROM
 
 -- ============================================================
 -- Checking silver.crm_prd_info
-
-### Note: Yet to complete the query 
 -- ============================================================
-
+	
+-- Check for Nulls or Duplicates in Primary key
+-- Expectation: No result
+SELECT
+	prd_id, COUNT(*)
+FROM 
+	silver.crm_prd_info
+GROUP BY
+	prd_id
+HAVING 
+	COUNT(*) > 1;
 -- Check for unwanted spaces 
 -- Expectation: No result
 
