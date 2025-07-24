@@ -127,3 +127,26 @@ WHERE
 	sls_sales IS NULL OR sls_price IS NULL OR sls_quantity IS NULL OR
 	sls_sales <= 0 OR sls_price <= 0 OR sls_quantity <= 0
 ORDER BY sls_sales, sls_price, sls_quantity	;
+
+-- ============================================================
+-- Checking silver.erp_cust_az12
+-- ============================================================
+
+-- Identify out of range dates
+
+SELECT 
+	DISTINCT bdate
+FROM
+	silver.erp_cust_az12
+WHERE
+	bdate < '1924-01-01' OR
+	bdate > GETDATE();
+
+-- Data Standardization & consistency
+
+SELECT 
+	DISTINCT gen
+FROM
+	silver.erp_cust_az12;
+
+SELECT * FROM silver.erp_cust_az12;
