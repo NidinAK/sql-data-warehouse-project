@@ -8,7 +8,7 @@ Purpose: Stores customer details enriched with demographic and geographic data.
 Columns:
 
 | Column Name | Data Type | Description |
-| --- | --- |
+| --- | --- | --- |
 | customer_key	| INT	| Surrogate key uniquely identifying each customer record in the dimension table.
 | customer_id	| INT	| Unique numerical identifier assigned to each customer.
 | customer_number	| NVARCHAR(50)	| Alphanumeric identifier representing the customer, used for tracking and referencing.
@@ -26,7 +26,7 @@ Purpose: Provides information about the products and their attributes.
 Columns:
 
 | Column Name	| Data Type |	Description |
-| --- | --- |
+| --- | --- | --- |
 | product_key	| INT	| Surrogate key uniquely identifying each product record in the product dimension table. |
 | product_id	| INT	| A unique identifier assigned to the product for internal tracking and referencing. |
 | product_number	| NVARCHAR(50)	| A structured alphanumeric code representing the product, often used for categorization or inventory. |
@@ -45,7 +45,7 @@ Purpose: Stores transactional sales data for analytical purposes.
 Columns:
 
 | Column Name	| Data Type	| Description |
-| --- | --- |
+| --- | --- | --- | 
 | order_number	| NVARCHAR(50)	| A unique alphanumeric identifier for each sales order (e.g., 'SO54496'). |
 | product_key	| INT	| Surrogate key linking the order to the product dimension table. |
 | customer_key	| INT	| Surrogate key linking the order to the customer dimension table. |
